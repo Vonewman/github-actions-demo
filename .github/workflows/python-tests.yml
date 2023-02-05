@@ -1,0 +1,31 @@
+name: Python tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Test with Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+        python -m unittest discover
+
+    - name: Test with Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+        python -m unittest discover
